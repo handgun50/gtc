@@ -27,8 +27,8 @@ $(document).ready(function() {
         "lengthMenu":[100,250], 
         "dom":"frtip", 
         "columns":[
-            {"data":"ghost","title":"Ghost","width":"100px","className":"dt-body-left"}, 
-            {"data":"A","title":"1","width":"100px","className":"unknown"},
+			{"data":"ghost","title":"Ghost","width":"100px","className":"dt-body-left"}, 
+			{"data":"A","title":"1","width":"100px","className":"unknown"},
 			{"data":"B","title":"2","width":"100px","className":"unknown"},
 			{"data":"C","title":"3","width":"100px","className":"unknown"},
 			{"data":"D","title":"4","width":"100px","className":"unknown"},
@@ -45,10 +45,6 @@ $(document).ready(function() {
         input_filter_timeout=setTimeout(function(){
             usertable.search( input_filter_value ).draw();
         }, usertable.context[0].searchDelay);
-    });
-
-    $('#ongkirExtra,#cashbackExtra').change( function() {
-        usertable.draw();
     });
 
 } );

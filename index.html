@@ -14,11 +14,12 @@ a{text-decoration: none !important; }
 
 <head> 
 <meta charset="UTF-8">
+<title>GTC Attraction Table</title>
+
 <script type="text/javascript" src="js/jquery-3.5.1.js"></script>
 <script type="text/javascript" src="js/jquery.dataTables.min.js"></script>
 
 <script> 
-
 $(document).ready(function() {
     var usertable=$('#example').DataTable( {
         "ajax": "attractionData.txt",
@@ -48,18 +49,22 @@ $(document).ready(function() {
     });
 
 } );
-
-
-
 </script>
+
 <link rel="stylesheet" type="text/css" href="css/jquery.dataTables.min.css">
 
 </head>
 
-
 <body>
 <div>
 <table id="example" width="300px" style="float:left"></table>
+</div>
+<div style="max-width:100%;line-height:1.8">
+<br>Notes:<br>
+<ol>
+<li>Midnight counterparts are assumed to have same <b>Attraction</b> with their normal counterparts. If you aim for the midnight ghosts, then adjust your <b>Attraction</b> based on table above and add <b>Midnight Attraction</b> as high as possible</li>
+<li>More sample = more accurate</li>
+</ol>
 </div>
 </body> 
 </html>

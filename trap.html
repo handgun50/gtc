@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+
+<style> 
+
+    *{font-family: Verdana,Arial; }
+    //table {table-layout: fixed !important;}
+    //table {table-layout: fixed !important; padding-top:20px; border-bottom:none !important}
+    //th{background-color: #8DA788 !important; color: #ffffff !important;border-bottom:none !important}
+    //tr.even{background-color: #caeec2 !important; }
+    //tr.odd{background-color: #ffffff !important; }
+    //td.dt-nowrap { white-space: nowrap !important;}
+    a{text-decoration: none !important; }
+    .dataTables_filter{float:left;}
+    .type-icon {
+        display: inline-block;
+        width: 75px;
+        margin-bottom: 4px;
+        background: #dbdbdb;
+        border: 1px solid #a3a3a3;
+        border-radius: 4px;
+        border: 1px solid rgba(0,0,0,0.2);
+        color: #fff;
+        font-size: .75rem;
+        font-weight: normal;
+        line-height: 1.5rem;
+        text-align: center;
+        text-shadow: 1px 1px 2px rgba(0,0,0,0.7);
+        text-transform: uppercase;
+        transition: opacity .4s;
+        }
+
+    .type-midnight {
+        background-color: #66b;
+    }
+    
+    .type-normal {    
+        background-color: #aa9;
+    }
+    
+    .type-techy {
+        background-color: #6cf;
+    }
+    
+    .type-evil {
+        background-color: #f42;
+    }
+    
+    .type-bio {
+        background-color: #7c5;
+    }
+    
+    .type-arcane {
+        background-color: #a59;
+    }
+
+    .type-party {
+        background-color: #fc3;
+    }
+    
+    .type-mystic-immunity {
+        background-color: #f59;
+    }
+    
+</style>
+
+<head> 
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, width=device-width">
+    <title>GTC Trap Table</title>
+
+    <script type="text/javascript" src="js/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript" src="js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="js/dataTables.bootstrap5.min.js"></script>
+
+    <script> 
+        $(document).ready(function() {
+            var usertable=$('#example').DataTable( {
+                "ajax": "trapData.txt",
+                "deferRender": true,
+                "searchDelay":750,
+                "lengthMenu":[100,250],
+                "dom":"frtip",
+                "order": [[1,"asc"]],
+                "columns":[
+                    {"data":"name","title":"Name","className":"text-nowrap"}, 
+                    {"data":"reqXP","title":"XP","className":"text-end","render":$.fn.dataTable.render.number('.', ',', 0)},
+                    {"data":"priceGBP","title":"Price","className":"text-end","render":$.fn.dataTable.render.number('.', ',', 0)},
+                    {"data":"stats_power","title":"Raw"},
+                    {"data":"stats_mysticPower","title":"Mys tic"},
+                    {"data":"stats_tsc","title":"TSC"},
+                    {"data":"stats_attraction","title":"Att"},
+                    {"data":"stats_midnightAttraction","title":"Mid Att"},
+                    //{"data":"stats_fetch","title":"Fetch"},
+                    {"data":"stats_burner","title":"Burn er"},
+                    {"data":"stats_lootChance","title":"Loot"},
+                    //{"data":"stats_mystery","title":"Mystery"},
+                    {"data":"stats_anti_arcane","title":"Anti Arcane"},
+                    {"data":"stats_anti_evil","title":"Anti Evil"},
+                    {"data":"stats_anti_techy","title":"Anti Techy"},
+                    {"data":"stats_anti_biological","title":"Anti Bio"},
+                    {"data":"stats_anti_party","title":"Anti Party"},
+                    //{"data":"stats_backpack","title":"backpack"},
+                    //{"data":"stats_onTheHouse","title":"On The House"},
+                    {"data":"stats_reconstruction","title":"Recon struc tion"},
+                    {"data":"stats_maltyMists","title":"MM"}
+                ]
+            } );
+
+            var input_filter_value;
+            var input_filter_timeout=null;
+            $("div.dataTables_filter input").unbind();
+            $("div.dataTables_filter input").keyup( function (e) {
+                input_filter_value=this.value;
+                clearTimeout(input_filter_timeout);
+                input_filter_timeout=setTimeout(function(){
+                    usertable.search( input_filter_value ).draw();
+                }, usertable.context[0].searchDelay);
+            });
+
+        } );
+    </script>
+
+    <link rel="stylesheet" type="text/css" href="css/dataTables.bootstrap5.min.css">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+
+</head>
+
+<body>
+    <br>
+<div class="container col-12">
+<table id="example" class="table table-striped"></table>
+    </div>
+</body> 
+</html>

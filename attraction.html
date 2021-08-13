@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+
+<style> 
+
+*{font-family: Verdana,Arial; }
+
+table {table-layout: fixed !important; padding-top:20px; border-bottom:none !important}
+th{background-color: #8DA788 !important; color: #ffffff !important;border-bottom:none !important}
+tr.even{background-color: #caeec2 !important; }
+tr.odd{background-color: #ffffff !important; }
+a{text-decoration: none !important; }
+
+</style>
+
+<head> 
+<meta charset="UTF-8">
+<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, width=device-width">
+<title>GTC Attraction Table</title>
+
+<script type="text/javascript" src="js/jquery-3.5.1.js"></script>
+<script type="text/javascript" src="js/jquery.dataTables.min.js"></script>
+
+<script> 
+$(document).ready(function() {
+    var usertable=$('#example').DataTable( {
+        "ajax": "attractionData.txt",
+        "deferRender": true,
+        "searchDelay":750,
+        "lengthMenu":[100,250], 
+        "dom":"frtip", 
+        "columns":[
+			{"data":"ghost","title":"Ghost","width":"100px","className":"dt-body-left"}, 
+			{"data":"A","title":"1","width":"100px","className":"unknown"},
+			{"data":"B","title":"2","width":"100px","className":"unknown"},
+			{"data":"C","title":"3","width":"100px","className":"unknown"},
+			{"data":"D","title":"4","width":"100px","className":"unknown"},
+			{"data":"E","title":"5","width":"100px","className":"unknown"},
+			{"data":"F","title":"6","width":"100px","className":"unknown"}
+        ]
+    } );
+
+    var input_filter_value;
+    var input_filter_timeout=null;
+    $("div.dataTables_filter input").unbind();
+    $("div.dataTables_filter input").keyup( function (e) {
+        input_filter_value=this.value;
+        clearTimeout(input_filter_timeout);
+        input_filter_timeout=setTimeout(function(){
+            usertable.search( input_filter_value ).draw();
+        }, usertable.context[0].searchDelay);
+    });
+
+} );
+</script>
+
+<link rel="stylesheet" type="text/css" href="css/jquery.dataTables.min.css">
+
+</head>
+
+<body>
+    <!--Navigation bar-->
+    <div id="nav-placeholder">
+    </div>
+    <script>
+    $(function(){
+        $("#nav-placeholder").load("nav.html");
+    });
+    </script>
+    <!--end of Navigation bar-->
+    
+    
+<div>
+<table id="example" width="300px" style="float:left"></table>
+</div>
+<div style="max-width:100%;line-height:1.8;font-size:16px">
+<br>Notes:<br>
+<ol>
+<li>All data above are only estimation</li>
+<li>Midnight counterparts are assumed to have same <b>Attraction</b> with their normal counterparts. If you aim for the midnight ghosts, you can:
+<ul>
+<li>Adjust your <b>Attraction</b> based on table above and add <b>Midnight Attraction</b> as high as possible, or</li>
+<li>Prioritize <b>Midnight Attraction</b> and ignore the <b>Attraction</b></li>
+</ul>
+<li>More sample = more accurate</li>
+</ol>
+</div>
+</body> 
+</html>
